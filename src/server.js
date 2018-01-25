@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const { DATABASE_URL, PORT } = require('./config');
+const { DATABASE_URL, PORT } = require('../config');
 // const { notesEntry } = require('./models');
 
 const app = express();
@@ -17,7 +17,7 @@ app.listen(process.env.PORT || 8080);
 //app.get
 
 app.get('/', (req, res) => {
-  res.status(200).end
+  res.status(200).end()
 });
 //app.post
 //app.put
