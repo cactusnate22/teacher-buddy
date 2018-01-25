@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const path = require('path');
+
 mongoose.Promise = global.Promise;
 
 const { DATABASE_URL, PORT } = require('../config');
@@ -17,8 +19,11 @@ app.listen(process.env.PORT || 8080);
 //app.get
 
 app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'))
+  // res.sendFile('./public/index.html');
   res.status(200).end()
 });
+
 //app.post
 //app.put
 //app.delete
