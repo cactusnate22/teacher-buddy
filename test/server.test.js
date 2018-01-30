@@ -24,3 +24,9 @@ describe('GET endpoint', function() {
     });
   });
 });
+
+//GET it('should return individual student from list')
+// PUT(or is this  a POST?) - it('should add student to list')
+//POST - it('should add behavior note to student record')
+//DELETE - it('should delete student from list')
+//DELETE - it('should delete behavior from student record')
