@@ -10,9 +10,9 @@ const {Students} = require('./models');
 
 //create a few students so they are in database
 Students.create(
-  'Nathan Ash', ['problem interupting today', 'called classmate bad name']);
+  'Nathan', 'Ash', ['problem interupting today', 'called classmate bad name']);
 Students.create(
-  'Serena Ash', ['very helpful', 'on task']);
+  'Serena', 'Ash', ['very helpful', 'on task']);
 
 //return JSON of all students on request to root/user page
 router.get('/', (req, res) => {
