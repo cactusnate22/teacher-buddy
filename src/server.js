@@ -13,6 +13,8 @@ const { DATABASE_URL, PORT } = require('../config');
 
 const app = express();
 
+const studentsRouter = require('./studentsRouter');
+
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
@@ -33,8 +35,8 @@ app.use('*', function (req, res) {
 // `/behavior-notes`, we'll route them to the express
 // router instances we've imported. Remember,
 // these router instances act as modular, mini-express apps.
-app.use('/students', studentRouter);
-app.use('/behavior-notes', behaviorNotesRouter);
+app.use('/students', studentsRouter);
+// app.use('/behavior-notes', behaviorNotesRouter);
 
 // closeServer needs access to a server object, but that only
 // gets created when `runServer` runs, so we declare `server` here
