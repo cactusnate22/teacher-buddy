@@ -7,11 +7,10 @@ const uuid = require('uuid');
 // }
 
 const Students = {
-  create: function(first_name, last_name) {
+  create: function(name) {
     const student = {
-      first_name: first_name,
-      last_name: last_name,
-      id: uuid.v4(),
+      name: name,
+      id: uuid.v4()
     };
     this.students[student.id] = student;
     return student;
