@@ -43,3 +43,16 @@ const newStudent = {first_name: 'John', last_name: 'Doe'};
 
 
 //DELETE - it('should delete student from list')
+it('should delete student on DELETE', function() {
+  return chai.request(app)
+    // first have to get so we have an `id` of item
+    // to delete
+    .get('/students')
+    .then(function(res) {
+      return chai.request(app)
+        .delete(`/students/${res.body[0].id}`);
+    })
+    .then(function(res) {
+      res.should.have.status(204);
+    });
+});
