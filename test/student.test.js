@@ -27,7 +27,7 @@ describe('GET endpoint', function() {
 // POST - it('should add student to list')
 describe('POST endpoint', function() {
 it('should add new student on POST', function(){
-const newStudent = {first_name: 'John', last_name: 'Doe'};
+const newStudent = {name: 'Johnny Doolittle'};
   return chai.request(app)
   .post('/students')
   .send(newStudent)
@@ -35,7 +35,7 @@ const newStudent = {first_name: 'John', last_name: 'Doe'};
     res.should.have.status(201);
     res.should.be.json;
     res.body.should.be.a('object');
-    res.body.should.include.keys('first_name', 'last_name');
+    res.body.should.include.keys('name');
     res.body.name.should.equal(newStudent.name);
     });
   });
