@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
@@ -10,9 +9,9 @@ const {Students} = require('./models');
 
 //create a few students so they are in database
 Students.create(
-  'Nathan', 'Ash', ['problem interupting today', 'called classmate bad name']);
+  'Nathan Ash', ['problem interupting today', 'called classmate bad name']);
 Students.create(
-  'Serena', 'Ash', ['very helpful', 'on task']);
+  'Serena Ash', ['very helpful', 'on task']);
 
 //return JSON of all students on request to root/user page
 router.get('/', (req, res) => {
@@ -24,7 +23,7 @@ router.get('/', (req, res) => {
 // if okay, add new item, and return it with a status 201.
 router.post('/', jsonParser, (req, res) => {
   // ensure `name` and `budget` are in request body
-  const requiredFields = ['first_name', 'last_name'];
+  const requiredFields = ['name'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -32,7 +31,7 @@ router.post('/', jsonParser, (req, res) => {
       return res.status(400).send(message);
     }
   }
-  const item = Students.create(req.body.first_name, req.body.last_name);
+  const item = Students.create(req.body.name);
   res.status(201).json(item);
 });
 
