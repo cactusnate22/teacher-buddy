@@ -1,20 +1,17 @@
 var MOCK_STUDENTS = {
     "students": [
         {
-            "first_name": "Jim",
-            "last_name": "James",
-            "studentId": "aaaaaa"
+            "name": "Jim James",
+            "id": "aaaaaa"
         },
         {
-            "first_name": "Jan",
-            "last_name": "Janson",
-            "studentId": "bbbbbb"
+            "name": "Jan Janson",
+            "id": "bbbbbb"
         },
 
         {
-            "first_name": "Jack",
-            "last_name": "Jackson",
-            "studentId": "cccccc"
+            "name": "Jack Jackson",
+            "id": "cccccc"
         }
     ]
 };
@@ -26,9 +23,9 @@ function getStudents(callbackFn) {
 // this function stays the same when we connect
 // to real API later
 function displayStudents(data) {
-    for (index in data.studentList) {
+    for (index in data.students) {
        $('body').append(
-        '<p>' + data.studentList[index].text + '</p>');
+        '<p>' + data.students[index].text + '</p>');
     }
 }
 
