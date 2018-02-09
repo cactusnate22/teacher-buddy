@@ -1,4 +1,16 @@
+'use strict';
+
+const mongoose = require('mongoose');
 const uuid = require('uuid');
+
+// this is the schema to represent a user
+const studentSchema = mongoose.Schema({
+  // id: {type: Number, required: true},
+  name: {type: String, required: true},
+  teacherId: {type: String, required: true}
+});
+
+
 
 //is this needed???
 // function StorageException(message) {
