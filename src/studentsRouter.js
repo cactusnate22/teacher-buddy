@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
 
-const {Students} = require('./models');
+const {Students} = require('./models/student_models');
 
 
 //create a few students so they are in database?????
