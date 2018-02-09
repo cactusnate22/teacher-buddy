@@ -5,7 +5,8 @@ const chaiHttp = require('chai-http');
 
 const {app, runServer, closeServer} = require('../src/server');
 
-const expect = chai.expect;
+const expect = chai.expect
+chai.should();
 
 const {TEST_DATABASE_URL} = require('../config');
 // const {app} = require('../src/server');
@@ -41,6 +42,8 @@ const newStudent = {name: 'Johnny Doolittle'};
   });
 });
 
+
+//PUT- update student name
 
 //DELETE - it('should delete student from list')
 it('should delete student on DELETE', function() {

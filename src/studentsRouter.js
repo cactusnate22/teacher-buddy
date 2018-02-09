@@ -7,7 +7,7 @@ const jsonParser = bodyParser.json();
 const {Students} = require('./models');
 
 
-//create a few students so they are in database
+//create a few students so they are in database?????
 Students.create(
   'Nathan Ash', ['problem interupting today', 'called classmate bad name']);
 Students.create(
@@ -33,6 +33,14 @@ router.post('/', jsonParser, (req, res) => {
   }
   const item = Students.create(req.body.name);
   res.status(201).json(item);
+});
+
+//delete a student
+router.delete('/:id', (req, res) => {
+  Students
+    .findByIdAndRemove(req.params.id)
+    .then(restaurant => res.status(204).end())
+    .catch(err => res.status(500).json({ message: 'Internal server error' }));
 });
 
 module.exports = router;
