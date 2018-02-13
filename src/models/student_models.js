@@ -22,6 +22,7 @@ const Students = {
   create: function(name) {
     const student = {
       name: name,
+      teacherId: teacherId,
       id: uuid.v4()
     };
     this.students[student.id] = student;
