@@ -8,10 +8,10 @@ const {Students} = require('./models/student_models');
 
 
 //create a few students so they are in database?????
-Students.create(
-  'Nathan Ash', ['problem interupting today', 'called classmate bad name']);
-Students.create(
-  'Serena Ash', ['very helpful', 'on task']);
+// Students.create(
+//   'Nathan Ash', ['problem interupting today', 'called classmate bad name']);
+// Students.create(
+//   'Serena Ash', ['very helpful', 'on task']);
 
 //return JSON of all students on request to root/user page
 router.get('/', (req, res) => {
@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 // if okay, add new item, and return it with a status 201.
 router.post('/', jsonParser, (req, res) => {
   // ensure `name` and `budget` are in request body
-  const requiredFields = ['name'];
+  const requiredFields = ['name', 'userId', 'id'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {

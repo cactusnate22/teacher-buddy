@@ -22,6 +22,8 @@ app.get('/', (req, res) => {
   // res.sendFile('./public/index.html');
   // res.status(200).end()
 });
+//eventually...create new user, will this go into a
+//seperate router...usersRouter.js??????
 
 //app.post
 //app.put
