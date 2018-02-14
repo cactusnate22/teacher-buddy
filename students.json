@@ -1,0 +1,15 @@
+{
+  "_id": "student-1",
+  "name": "Jim James",
+  "teacherId": "user-1"
+}
+{
+  "_id": "student-2",
+  "name": "Jan Janson",
+  "teacherId": "user-2"
+}
+{
+  "_id": "student-3",
+  "name": "Jack Jackson",
+  "teacherId": "user-3"
+}

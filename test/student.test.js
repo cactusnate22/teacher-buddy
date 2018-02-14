@@ -5,7 +5,8 @@ const chaiHttp = require('chai-http');
 
 const {app, runServer, closeServer} = require('../src/server');
 
-const expect = chai.expect;
+const expect = chai.expect
+chai.should();
 
 const {TEST_DATABASE_URL} = require('../config');
 // const {app} = require('../src/server');
@@ -27,7 +28,7 @@ describe('GET endpoint', function() {
 // POST - it('should add student to list')
 describe('POST endpoint', function() {
 it('should add new student on POST', function(){
-const newStudent = {first_name: 'John', last_name: 'Doe'};
+const newStudent = {name: 'Johnny Doolittle'};
   return chai.request(app)
   .post('/students')
   .send(newStudent)
@@ -35,11 +36,26 @@ const newStudent = {first_name: 'John', last_name: 'Doe'};
     res.should.have.status(201);
     res.should.be.json;
     res.body.should.be.a('object');
-    res.body.should.include.keys('first_name', 'last_name');
+    res.body.should.include.keys('name');
     res.body.name.should.equal(newStudent.name);
     });
   });
 });
 
 
+//PUT- update student name
+
 //DELETE - it('should delete student from list')
+it('should delete student on DELETE', function() {
+  return chai.request(app)
+    // first have to get so we have an `id` of item
+    // to delete
+    .get('/students')
+    .then(function(res) {
+      return chai.request(app)
+        .delete(`/students/${res.body[0].id}`);
+    })
+    .then(function(res) {
+      res.should.have.status(204);
+    });
+});

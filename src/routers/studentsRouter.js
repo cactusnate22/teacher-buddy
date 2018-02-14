@@ -1,22 +1,21 @@
 const express = require('express');
 const router = express.Router();
-
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
 
-const {Student} = require('./models');
+const {Students} = require('./models/student_models');
 
 
-//create a few students so they are in database
-Student.create(
-  'Nathan Ash', ['problem interupting today', 'called classmate bad name']
-Student.create(
-  'Serena Ash', ['very helpful', 'on task']);
+//create a few students so they are in database?????
+// Students.create(
+//   'Nathan Ash', ['problem interupting today', 'called classmate bad name']);
+// Students.create(
+//   'Serena Ash', ['very helpful', 'on task']);
 
 //return JSON of all students on request to root/user page
 router.get('/', (req, res) => {
-  res.json(Student.get());
+  res.json(Students.get());
 });
 
 // when new student added, ensure has required fields. if not,
@@ -24,7 +23,7 @@ router.get('/', (req, res) => {
 // if okay, add new item, and return it with a status 201.
 router.post('/', jsonParser, (req, res) => {
   // ensure `name` and `budget` are in request body
-  const requiredFields = ['first_name', 'last_name'];
+  const requiredFields = ['name', 'userId', 'id'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -32,6 +31,16 @@ router.post('/', jsonParser, (req, res) => {
       return res.status(400).send(message);
     }
   }
-  const item = Student.create(req.body.first_name, req.body.last_name);
+  const item = Students.create(req.body.name);
   res.status(201).json(item);
 });
+
+//delete a student
+router.delete('/:id', (req, res) => {
+  Students
+    .findByIdAndRemove(req.params.id)
+    .then(restaurant => res.status(204).end())
+    .catch(err => res.status(500).json({ message: 'Internal server error' }));
+});
+
+module.exports = router;

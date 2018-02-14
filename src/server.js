@@ -22,14 +22,14 @@ app.get('/', (req, res) => {
   // res.sendFile('./public/index.html');
   // res.status(200).end()
 });
+//eventually...create new user, will this go into a
+//seperate router...usersRouter.js??????
 
 //app.post
 //app.put
 //app.delete
 
-app.use('*', function (req, res) {
-  res.status(404).json({ message: 'Not Found' });
-});
+
 
 // when requests come into `/student` or
 // `/behavior-notes`, we'll route them to the express
@@ -41,6 +41,11 @@ app.use('/students', studentsRouter);
 // closeServer needs access to a server object, but that only
 // gets created when `runServer` runs, so we declare `server` here
 // and then assign a value to it in run
+
+app.use('*', function (req, res) {
+  res.status(404).json({ message: 'Not Found' });
+});
+
 let server;
 
 // this function connects to our database, then starts the server
