@@ -8,7 +8,7 @@ const {app, runServer, closeServer} = require('../src/server');
 const expect = chai.expect;
 
 const {TEST_DATABASE_URL} = require('../config');
-// const {app} = require('../src/server');
+
 chai.use(chaiHttp);
 
 describe('GET endpoint', function() {

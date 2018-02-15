@@ -13,6 +13,7 @@ const { DATABASE_URL, PORT } = require('../config');
 
 const app = express();
 
+const usersRouter = require('./routers/usersRouter');
 const studentsRouter = require('./routers/studentsRouter');
 
 app.use(express.static('public'));
@@ -20,22 +21,10 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'))
 });
-//eventually...create new user, will this go into a
-//seperate router...usersRouter.js??????
 
-//app.post
-//app.put
-//app.delete
-
-
-
-// when requests come into `/student` or
-// `/behavior-notes`, we'll route them to the express
-// router instances we've imported. Remember,
-// these router instances act as modular, mini-express apps.
-app.use('src/routers/students', studentsRouter);
+// app.use('src/routers/students', studentsRouter);
 // app.use('src/routers/behavior-notes', behaviorNotesRouter);
-// app.use('src/routers/users', usersRouter);
+app.use('src/routers/users', usersRouter);
 
 app.use('*', function (req, res) {
   res.status(404).json({ message: 'Not Found' });
