@@ -9,18 +9,16 @@ const path = require('path');
 mongoose.Promise = global.Promise;
 
 const { DATABASE_URL, PORT } = require('../config');
-// const { notesEntry } = require('./models');
+
 
 const app = express();
 
-const studentsRouter = require('./studentsRouter');
+const studentsRouter = require('./routers/studentsRouter');
 
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'))
-  // res.sendFile('./public/index.html');
-  // res.status(200).end()
 });
 //eventually...create new user, will this go into a
 //seperate router...usersRouter.js??????
@@ -35,17 +33,17 @@ app.get('/', (req, res) => {
 // `/behavior-notes`, we'll route them to the express
 // router instances we've imported. Remember,
 // these router instances act as modular, mini-express apps.
-app.use('/students', studentsRouter);
-// app.use('/behavior-notes', behaviorNotesRouter);
-
-// closeServer needs access to a server object, but that only
-// gets created when `runServer` runs, so we declare `server` here
-// and then assign a value to it in run
+app.use('src/routers/students', studentsRouter);
+// app.use('src/routers/behavior-notes', behaviorNotesRouter);
+// app.use('src/routers/users', usersRouter);
 
 app.use('*', function (req, res) {
   res.status(404).json({ message: 'Not Found' });
 });
 
+// closeServer needs access to a server object, but that only
+// gets created when `runServer` runs, so we declare `server` here
+// and then assign a value to it in run
 let server;
 
 // this function connects to our database, then starts the server

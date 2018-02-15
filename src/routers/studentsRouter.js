@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
 
-const {Students} = require('./models/student_models');
+const {Students} = require('../models/student_models');
 
 
 //create a few students so they are in database?????
@@ -14,14 +14,14 @@ const {Students} = require('./models/student_models');
 //   'Serena Ash', ['very helpful', 'on task']);
 
 //return JSON of all students on request to root/user page
-router.get('/', (req, res) => {
+router.get('/students', (req, res) => {
   res.json(Students.get());
 });
 
 // when new student added, ensure has required fields. if not,
 // log error and return 400 status code with hepful message.
 // if okay, add new item, and return it with a status 201.
-router.post('/', jsonParser, (req, res) => {
+router.post('/students', jsonParser, (req, res) => {
   // ensure `name` and `budget` are in request body
   const requiredFields = ['name', 'userId', 'id'];
   for (let i=0; i<requiredFields.length; i++) {

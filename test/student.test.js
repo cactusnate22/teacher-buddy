@@ -46,7 +46,7 @@ const newStudent = {name: 'Johnny Doolittle'};
 //PUT- update student name
 
 //DELETE - it('should delete student from list')
-it('should delete student on DELETE', function() {
+xit('should delete student on DELETE', function() {
   return chai.request(app)
     // first have to get so we have an `id` of item
     // to delete
