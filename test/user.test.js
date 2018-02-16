@@ -12,22 +12,22 @@ const {TEST_DATABASE_URL} = require('../config');
 // const {app} = require('../src/server');
 chai.use(chaiHttp);
 
-// describe('GET endpoint', function() {
-//
-//   xit('should return list of students page HTML and 200 status code upon root url hit', function() {
-//     let res;
-//     return chai.request(app)
-//     .get('/students')
-//     .then(function(_res) {
-//       res = _res;
-//       expect(res).to.have.status(200);
-//     });
-//   });
-// });
-//
-// // POST - it('should add student to list')
+describe('GET endpoint', function() {
+
+  xit('should return list of students page HTML and 200 status code upon root url hit', function() {
+    let res;
+    return chai.request(app)
+    .get('./public/user')
+    .then(function(_res) {
+      res = _res;
+      expect(res).to.have.status(200);
+    });
+  });
+});
+
+// POST - it('should add student to list')
 // describe('POST endpoint', function() {
-// xit('should add new student on POST', function(){
+// it('should add new student on POST', function(){
 // const newStudent = {name: 'Johnny Doolittle'};
 //   return chai.request(app)
 //   .post('/students')
