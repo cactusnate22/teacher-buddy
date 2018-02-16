@@ -1,5 +1,3 @@
-'use strict';
-
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 
@@ -11,16 +9,32 @@ const {TEST_DATABASE_URL} = require('../config');
 
 chai.use(chaiHttp);
 
-describe('GET endpoint', function() {
 
-  it('should return HTML and 200 status code upon root url hit', function() {
+describe('Teacher Buddy', function () {
+  // before(runServer)
+  // after(closeServer)
 
-    let res;
+  it('has a Welcome page', function () {
     return chai.request(app)
-    .get('/')
-    .then(function(_res) {
-      res = _res;
-      expect(res).to.have.status(200);
-    });
+      .get('/')
+      .then((res) => {
+        expect(res).to.have.status(200);
+        expect(res).to.be.html;
+      })
   });
-});
+})
+
+
+// describe('GET endpoint', function() {
+//
+//   it('should return HTML and 200 status code upon root url hit', function() {
+//
+//     let res;
+//     return chai.request(app)
+//     .get('/')
+//     .then(function(_res) {
+//       res = _res;
+//       expect(res).to.have.status(200);
+//     });
+//   });
+// });

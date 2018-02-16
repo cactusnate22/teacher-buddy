@@ -16,14 +16,14 @@
     "mocha": "^5.0.0"
   },
   "scripts": {
-    "test": "mocha --exit",
+    "test": "mocha --exit test/server.test.js",
     "start": "node src/server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cactusnate22/teacher-buddy.git"
   },
-  "author": "Nathan Ash nash311@gmail.com",
+  "author": "Nathan Ash <nash311@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/cactusnate22/teacher-buddy/issues"

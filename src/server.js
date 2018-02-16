@@ -1,30 +1,23 @@
-'use strict';
-
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const express = require('express');
-const morgan = require('morgan');
-const mongoose = require('mongoose');
+// const morgan = require('morgan');
+// const mongoose = require('mongoose');
 const path = require('path');
 
-mongoose.Promise = global.Promise;
+// mongoose.Promise = global.Promise;
 
 const { DATABASE_URL, PORT } = require('../config');
 
-
 const app = express();
 
-const usersRouter = require('./routers/usersRouter');
-const studentsRouter = require('./routers/studentsRouter');
+// const usersRouter = require('./routers/usersRouter');
+// const studentsRouter = require('./routers/studentsRouter');
 
-app.use(express.static('public'));
+// app.use('/api/students', studentsRouter);
+// app.use('/api/behavior-notes', behaviorNotesRouter);
+// app.use('/api/users', usersRouter);
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'))
-});
-
-// app.use('src/routers/students', studentsRouter);
-// app.use('src/routers/behavior-notes', behaviorNotesRouter);
-app.use('src/routers/users', usersRouter);
+app.use(express.static(path.resolve(__dirname, 'public')));
 
 app.use('*', function (req, res) {
   res.status(404).json({ message: 'Not Found' });
@@ -54,9 +47,9 @@ function runServer(databaseUrl = DATABASE_URL, port = PORT) {
         resolve()
       })
     }))
-    .catch((error) => {
-      mongoose.disconnect();
-    })
+    // .catch((error) => {
+    //   mongoose.disconnect();
+    // })
 }
 
 // this function closes the server, and returns a promise. we'll
