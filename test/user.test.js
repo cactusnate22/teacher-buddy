@@ -14,10 +14,10 @@ chai.use(chaiHttp);
 
 describe('GET endpoint', function() {
 
-  xit('should return list of students page HTML and 200 status code upon root url hit', function() {
+  it('should return list of students page HTML and 200 status code upon root url hit', function() {
     let res;
     return chai.request(app)
-    .get('./public/user')
+    .get('../public/user')
     .then(function(_res) {
       res = _res;
       expect(res).to.have.status(200);

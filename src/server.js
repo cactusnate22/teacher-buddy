@@ -6,7 +6,10 @@ const path = require('path');
 
 // mongoose.Promise = global.Promise;
 
-const { DATABASE_URL, PORT } = require('../config');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+console.log('DATABASE_URL', process.env.DATABASE_URL)
+
+// const { DATABASE_URL, PORT } = require('../config');
 
 const app = express();
 
@@ -15,7 +18,7 @@ const app = express();
 
 // app.use('/api/students', studentsRouter);
 // app.use('/api/behavior-notes', behaviorNotesRouter);
-// app.use('/api/users', usersRouter);
+app.use('/api/users', usersRouter);
 
 app.use(express.static(path.resolve(__dirname, 'public')));
 
