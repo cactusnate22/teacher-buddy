@@ -11,11 +11,19 @@ const {User} = require('../models/user_models');
 const {Students} = require('../models/student_models');
 
 //DO I NEED THIS TO ACCESS USER.HTML????
-// router.use(express.static('public'));
+router.use(express.static('public'));
 
-router.get('/user', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/user.html'))
+// //OPTION ONE-----------------
+// router.get('/users/:id', (req, res) => {
+//   res.json(User.get());
+// });
+// //----------------------------
+
+//OPTION TWO------------------
+router.get('/users/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'))
 });
+//-----------------------------
 
 // router.get('./public/user', (req, res) => {
 //   res.json(User.get());

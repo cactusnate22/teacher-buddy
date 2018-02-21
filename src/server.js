@@ -13,12 +13,12 @@ console.log('DATABASE_URL', process.env.DATABASE_URL)
 
 const app = express();
 
-// const usersRouter = require('./routers/usersRouter');
+const usersRouter = require('./routers/usersRouter');
 // const studentsRouter = require('./routers/studentsRouter');
 
 // app.use('/api/students', studentsRouter);
 // app.use('/api/behavior-notes', behaviorNotesRouter);
-app.use('/api/users', usersRouter);
+app.use('/api/user/:id', usersRouter);
 
 app.use(express.static(path.resolve(__dirname, 'public')));
 
