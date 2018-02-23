@@ -7,7 +7,7 @@ page('/', (context) => {
 })
 
 page('/users/:id', (context) => {
-  $root.innerHTML = `Here I should be showing user with id ${context.params.id}`
+  $root.innerHTML = `Here I should be showing user with id (and list of users students) ${context.params.id}`
 })
 
 page({ hashbang: true })

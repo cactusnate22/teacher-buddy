@@ -13,7 +13,7 @@ const {Students} = require('../models/student_models');
 // Students.create(
 //   'Serena Ash', ['very helpful', 'on task']);
 
-//return JSON of all students on request to root/user page
+//return individual student page
 router.get('/students', (req, res) => {
   res.json(Students.get());
 });
@@ -22,7 +22,6 @@ router.get('/students', (req, res) => {
 // log error and return 400 status code with hepful message.
 // if okay, add new item, and return it with a status 201.
 router.post('/students', jsonParser, (req, res) => {
-  // ensure `name` and `budget` are in request body
   const requiredFields = ['name', 'userId', 'id'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
