@@ -1,24 +1,29 @@
+require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') })
+
+const debug = require('debug')('tb:server')
+
 // const bodyParser = require('body-parser');
 const express = require('express');
 // const morgan = require('morgan');
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const path = require('path');
 
-// mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise;
 
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
-console.log('DATABASE_URL', process.env.DATABASE_URL)
+debug('process.env.DATABASE_URL', process.env.DATABASE_URL)
 
-// const { DATABASE_URL, PORT } = require('../config');
+const { DATABASE_URL, PORT } = require('../config');
+
+debug('DATABASE_URL', DATABASE_URL)
 
 const app = express();
 
 const usersRouter = require('./routers/usersRouter');
-// const studentsRouter = require('./routers/studentsRouter');
 
+// const studentsRouter = require('./routers/studentsRouter');
 // app.use('/api/students', studentsRouter);
 // app.use('/api/behavior-notes', behaviorNotesRouter);
-app.use('/api/user/:id', usersRouter);
+app.use('/api/users', usersRouter);
 
 app.use(express.static(path.resolve(__dirname, 'public')));
 
@@ -33,15 +38,16 @@ let server;
 
 // this function connects to our database, then starts the server
 function runServer(databaseUrl = DATABASE_URL, port = PORT) {
+  console.log('runServer', typeof databaseUrl, databaseUrl, typeof port, port);
+
   return Promise.resolve()
-    // .then(() => new Promise((resolve, reject) => {
-    //   mongoose.connect(databaseUrl, (err) => {
-    //     if (err) return reject(err)
-    //
-    //     resolve()
-    //   })
-    //     .on('error', reject)
-    // }))
+    .then(() => new Promise((resolve, reject) => {
+        mongoose.connect(databaseUrl, (err) => {
+        if (err) return reject(err)
+
+        resolve()
+      })
+    }))
     .then(() => new Promise((resolve, reject) => {
       server = app.listen(port, (error) => {
         if (error) return reject(error)
@@ -50,9 +56,11 @@ function runServer(databaseUrl = DATABASE_URL, port = PORT) {
         resolve()
       })
     }))
-    // .catch((error) => {
-    //   mongoose.disconnect();
-    // })
+    .catch((error) => {
+      console.log('Something went wrong while running runServer')
+      console.error(error);
+      mongoose.disconnect();
+    })
 }
 
 // this function closes the server, and returns a promise. we'll
@@ -60,8 +68,10 @@ function runServer(databaseUrl = DATABASE_URL, port = PORT) {
 
 function closeServer() {
   return Promise.resolve()
-  // .then(() => mongoose.disconnect())
+  .then(() => mongoose.disconnect())
   .then(() => new Promise((resolve, reject) => {
+    if (!server) return resolve()
+
     server.close((err) => {
       if (err) return reject(err)
       resolve()
@@ -72,8 +82,15 @@ function closeServer() {
 // if server.js is called directly (aka, with `node server.js`), this block
 // runs. but we also export the runServer command so other code (for instance, test code) can start the server as needed.
 if (require.main === module) {
-  // runServer().catch(err => console.error(err));
-  runServer(null, process.env.PORT || 8080).catch(err => console.error(err));
+  console.log('Starting the app');
+
+  runServer()
+    .catch(err => {
+      console.error('Something went wrong while starting the app')
+      console.error(err)
+      process.exit()
+    });
+  // runServer(DATABASE_URL, process.env.PORT || 8080).catch(err => console.error(err));
 }
 
 module.exports = { runServer, app, closeServer };
